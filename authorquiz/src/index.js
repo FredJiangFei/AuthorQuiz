@@ -10,6 +10,8 @@ import Reloader from './Reloader';
 import * as serviceWorker from './serviceWorker';
 import './bootstrap.min.css'
 import { shuffle, sample } from 'underscore';
+import { BrowserRouter, Route, withRouter } from 'react-router-dom';
+import AddAuthorForm from './AddAuthorForm';
 
 const authors = [
   {
@@ -67,22 +69,41 @@ function getTurnData(authors) {
   }
 }
 
-const state = {
-  turnData: getTurnData(authors),
-  highlight: ''
-};
-
+function resetState() {
+  return {
+    turnData: getTurnData(authors),
+    highlight: ''
+  };
+}
+let state = resetState();
 
 function chooseBook(anwser) {
-  if (state.turnData.author.books.indexOf(anwser) > -1) {
-    state.highlight = 'correct';
-  } else {
-    state.highlight = 'wrong';
-  }
-  ReactDOM.render(<AuthorQuiz {...state}  chooseBook={chooseBook}/>, document.getElementById('root'));
+  const isCorrect = state.turnData.author.books.indexOf(anwser) > -1;
+  state.highlight = isCorrect ? 'correct' : 'wrong';
+  render();
 }
 
-ReactDOM.render(<AuthorQuiz {...state}  chooseBook={chooseBook}/>, document.getElementById('root'));
+function App() {
+  return <AuthorQuiz {...state} 
+    chooseBook={chooseBook} 
+    onContinue={() => { state = resetState(); render();
+    }}/>;
+}
+
+const AuthorWrapper = withRouter(({ history }) =>
+  <AddAuthorForm onAddAuthor={a => { authors.push(a); history.push('/'); }} />
+);
+
+function render() {
+  ReactDOM.render(
+  <BrowserRouter>
+    <React.Fragment>
+      <Route exact path="/" component={App} />
+      <Route path="/add" component={AuthorWrapper} />
+    </React.Fragment>
+  </BrowserRouter>, document.getElementById('root'));
+}
+render();
 
 // const props = { a:2, b: 4};
 // ReactDOM.render(<Sum {...props} />,  document.getElementById('root'));

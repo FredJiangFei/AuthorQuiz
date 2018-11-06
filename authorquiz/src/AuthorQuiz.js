@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 function Hero() {
   return (
@@ -56,9 +57,15 @@ Turn.propTypes = {
 };
 
 
-function Continue() {
+function Continue({ show, onContinue }) {
   return (
-    <div className="row"></div>
+    <div className="row continue">
+      {show
+        ? <div className="col-11">
+          <button className="btn btn-primary btn-lg float-right" onClick={onContinue}>Continue</button>
+        </div>
+        : null}
+    </div>
   );
 }
 
@@ -73,13 +80,14 @@ function Footer() {
     </div>);
 }
 
-function AuthorQuiz({ turnData, highlight, chooseBook }) {
+function AuthorQuiz({ turnData, highlight, chooseBook, onContinue }) {
   return (
     <div className="container-fluid">
-      <Hero></Hero>
-      <Turn {...turnData} highlight={highlight} chooseBook={chooseBook}></Turn>
-      <Continue></Continue>
-      <Footer></Footer>
+      <Hero />
+      <Turn {...turnData} highlight={highlight} chooseBook={chooseBook} />
+      <Continue show={highlight === 'correct'} onContinue={onContinue} />
+      <p><Link to="/add">Add an author</Link></p>
+      <Footer />
     </div>
   );
 }
