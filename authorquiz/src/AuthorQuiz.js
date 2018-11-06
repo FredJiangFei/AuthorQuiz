@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
+import PropTypes from 'prop-types';
 
 function Hero() {
   return (
@@ -13,9 +14,8 @@ function Hero() {
 }
 
 function Book({ title, chooseBook }) {
-
   return (
-    <div className="answer" onClick={chooseBook}>
+    <div className="answer" onClick={e => chooseBook(title)}>
       <h4>{title}</h4>
     </div>
   );
@@ -38,10 +38,23 @@ function Turn({ author, books, highlight, chooseBook }) {
         <img src={author.imageUrl} className="authorimage" alt="Author" />
       </div>
       <div className="col-6">
-        {books.map((t) => <Book title={t} key={t} chooseBook={e => chooseBook(t)} />)}
+        {books.map((t) => <Book title={t} key={t} chooseBook={chooseBook} />)}
       </div>
     </div>);
 }
+
+Turn.propTypes = {
+  author: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    imageUrl: PropTypes.string.isRequired,
+    imageSource: PropTypes.string.isRequired,
+    books: PropTypes.arrayOf(PropTypes.string).isRequired
+  }),
+  books: PropTypes.arrayOf(PropTypes.string).isRequired,
+  onAnswerSelected: PropTypes.func.isRequired,
+  highlight: PropTypes.string.isRequired
+};
+
 
 function Continue() {
   return (
@@ -60,18 +73,7 @@ function Footer() {
     </div>);
 }
 
-function AuthorQuiz({ turnData, highlight }) {
-
-  function chooseBook(book) {
-    if(turnData.author.books.contains(book)){
-      highlight = 'correct';
-    }else{
-      highlight = 'wrong';
-    }   
-    // console.log(turnData.author);
-    // console.log(book);
-  }
-
+function AuthorQuiz({ turnData, highlight, chooseBook }) {
   return (
     <div className="container-fluid">
       <Hero></Hero>

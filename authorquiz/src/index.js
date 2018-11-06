@@ -72,7 +72,17 @@ const state = {
   highlight: ''
 };
 
-ReactDOM.render(<AuthorQuiz {...state} />, document.getElementById('root'));
+
+function chooseBook(anwser) {
+  if (state.turnData.author.books.indexOf(anwser) > -1) {
+    state.highlight = 'correct';
+  } else {
+    state.highlight = 'wrong';
+  }
+  ReactDOM.render(<AuthorQuiz {...state}  chooseBook={chooseBook}/>, document.getElementById('root'));
+}
+
+ReactDOM.render(<AuthorQuiz {...state}  chooseBook={chooseBook}/>, document.getElementById('root'));
 
 // const props = { a:2, b: 4};
 // ReactDOM.render(<Sum {...props} />,  document.getElementById('root'));
