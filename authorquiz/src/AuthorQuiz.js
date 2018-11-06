@@ -12,22 +12,33 @@ function Hero() {
   );
 }
 
-function Book({ title }) {
+function Book({ title, chooseBook }) {
+
   return (
-    <div className="answer">
+    <div className="answer" onClick={chooseBook}>
       <h4>{title}</h4>
     </div>
   );
 }
 
-function Turn({ author, books }) {
+function Turn({ author, books, highlight, chooseBook }) {
+
+  function highlightToBgColor(highlight) {
+    const mapping = {
+      'none': '',
+      'correct': 'green',
+      'wrong': 'red'
+    };
+    return mapping[highlight];
+  }
+
   return (
-    <div className="row turn" style={{ backgroundColor: "white" }}>
+    <div className="row turn" style={{ backgroundColor: highlightToBgColor(highlight) }}>
       <div className="col-4 offset-1">
         <img src={author.imageUrl} className="authorimage" alt="Author" />
       </div>
       <div className="col-6">
-        {books.map((t) => <Book title={t} key={t} />)}
+        {books.map((t) => <Book title={t} key={t} chooseBook={e => chooseBook(t)} />)}
       </div>
     </div>);
 }
@@ -49,16 +60,27 @@ function Footer() {
     </div>);
 }
 
-function AuthorQuiz({ turnData }) {
+function AuthorQuiz({ turnData, highlight }) {
+
+  function chooseBook(book) {
+    if(turnData.author.books.contains(book)){
+      highlight = 'correct';
+    }else{
+      highlight = 'wrong';
+    }   
+    // console.log(turnData.author);
+    // console.log(book);
+  }
+
   return (
     <div className="container-fluid">
       <Hero></Hero>
-      <Turn {...turnData}></Turn>
+      <Turn {...turnData} highlight={highlight} chooseBook={chooseBook}></Turn>
       <Continue></Continue>
       <Footer></Footer>
     </div>
   );
 }
- 
+
 export default AuthorQuiz;
 
