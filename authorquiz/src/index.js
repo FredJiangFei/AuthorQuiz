@@ -6,6 +6,7 @@ import Sum from './Sum';
 import Clicker from './Clicker';
 import DangerContainer from './DangerContainer';
 import ConditionDisplay from './ConditionDisplay';
+import Reloader from './Reloader';
 import * as serviceWorker from './serviceWorker';
 import './bootstrap.min.css'
 import {shuffle, sample} from 'underscore';
@@ -77,10 +78,12 @@ ReactDOM.render(<AuthorQuiz {...state} />, document.getElementById('root'));
 // ReactDOM.render(<Sum {...props} />,  document.getElementById('root'));
 // const showChildren = true;
 
-// ReactDOM.render(<Clicker  handleClick= {(letter) => { console.log(`${letter} clicked.`) }} />,  document.getElementById('root'));
+ReactDOM.render(<Clicker  handleClick= {(letter) => { console.log(`${letter} clicked.`) }} />,  document.getElementById('root'));
 // ReactDOM.render(<DangerContainer dangerous='<strong>Hello</strong>' />,  document.getElementById('root'));
 // ReactDOM.render(<ConditionDisplay isVisible={ showChildren }>
 //     <h1><span>Sum</span></h1><Sum  {...props}/>
 // </ConditionDisplay>,  document.getElementById('root'));
 // ReactDOM.render(<ClickButtons numbers={ 10 } onSelect={console.log} />,  document.getElementById('root'));
+
+ReactDOM.render(<Reloader></Reloader>,  document.getElementById('root'));
 serviceWorker.unregister();

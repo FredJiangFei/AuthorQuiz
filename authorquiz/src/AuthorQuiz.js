@@ -12,22 +12,24 @@ function Hero() {
   );
 }
 
-function Book({title}) {
-  return (<div className="answer">
-    <h4>{title}</h4>
-  </div>
+function Book({ title }) {
+  return (
+    <div className="answer">
+      <h4>{title}</h4>
+    </div>
   );
 }
 
-function Turn({author, books}) {
-  return (<div className="row turn" style={{backgroundColor: "white"}}>
-    <div className="col-4 offset-1">
-      <img src={author.imageUrl} className="authorimage" alt="Author"/>
-    </div>
-    <div className="col-6">
-      {books.map((title) => <Book title={title} key={title} />)}
-    </div>
-  </div>);
+function Turn({ author, books }) {
+  return (
+    <div className="row turn" style={{ backgroundColor: "white" }}>
+      <div className="col-4 offset-1">
+        <img src={author.imageUrl} className="authorimage" alt="Author" />
+      </div>
+      <div className="col-6">
+        {books.map((t) => <Book title={t} key={t} />)}
+      </div>
+    </div>);
 }
 
 function Continue() {
@@ -37,25 +39,26 @@ function Continue() {
 }
 
 function Footer() {
-  return (<div id="footer" className="row">
-    <div className="col-12">
+  return (
+    <div id="footer" className="row">
+      <div className="col-12">
         <p className="text-muted credit">
           All images are from <a href="http://commons.wikimedia.org/wiki/Main_Page">Wikemedia Commons</a> and are in the public domain
         </p>
-    </div>
-  </div>);
+      </div>
+    </div>);
 }
 
-function AuthorQuiz({ turnData }){
+function AuthorQuiz({ turnData }) {
   return (
     <div className="container-fluid">
       <Hero></Hero>
-      <Turn { ...turnData }></Turn>
+      <Turn {...turnData}></Turn>
       <Continue></Continue>
       <Footer></Footer>
     </div>
   );
 }
-
+ 
 export default AuthorQuiz;
 
