@@ -14,10 +14,10 @@ var routes = (
     <Route name="authors" handler={require('./components/authors/authorPage')} />
     <Route name="authors/:authorId" handler={require('./components/authors/authorDetailPage')} />
     <Route name="about" handler={require('./components/about/aboutPage')} />
-    {/* <NotFoundRoute handler={require('./components/notFoundPage')} />
+    <NotFoundRoute handler={require('./components/notFoundPage')} />
     <Redirect from="about-us" to="about" />
     <Redirect from="awthurs" to="authors" />
-    <Redirect from="about/*" to="about" /> */}
+    <Redirect from="about/*" to="about" />
   </Route>
 );
 
