@@ -1,4 +1,7 @@
+"use strict";
+
 var React = require('react');
+var Link = React.Link
 
 var Header = React.createClass({
 	render: function() {

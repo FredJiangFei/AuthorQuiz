@@ -1,3 +1,5 @@
+"use strict";
+
 var authors = require('./authorData').authors;
 var _ = require('lodash');
 

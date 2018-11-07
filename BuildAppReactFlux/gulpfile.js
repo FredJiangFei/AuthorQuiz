@@ -74,7 +74,7 @@ gulp.task('images', function () {
 
 gulp.task('lint', function() {
 	return gulp.src(config.paths.js)
-		.pipe(lint({config: 'eslint.config.json'}))
+		.pipe(lint({configFile: 'eslint.config.json'}))
 		.pipe(lint.format());
 });
 
