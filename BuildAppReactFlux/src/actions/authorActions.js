@@ -5,6 +5,15 @@ var AuthorApi = require('../api/authorApi');
 var ActionTypes = require('../constants/actionTypes');
 
 var AuthorActions = {
+	initApp: function() {
+		Dispatcher.dispatch({
+			actionType: ActionTypes.INITIALIZE,
+			initialData: {
+				authors: AuthorApi.getAllAuthors()
+			}
+		});
+	},
+
 	createAuthor: function(author) {
 		var newAuthor = AuthorApi.saveAuthor(author);
 
