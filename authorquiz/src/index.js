@@ -1,19 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import AuthorQuiz from './AuthorQuiz';
-import Sum from './Sum';
-import Clicker from './Clicker';
-import DangerContainer from './DangerContainer';
-import ConditionDisplay from './ConditionDisplay';
-import Reloader from './Reloader';
 import * as serviceWorker from './serviceWorker';
 import './bootstrap.min.css'
 import { shuffle, sample } from 'underscore';
-import { BrowserRouter, Route, withRouter } from 'react-router-dom';
-import AddAuthorForm from './AddAuthorForm';
+import { BrowserRouter, Route } from 'react-router-dom';
 import * as Redux from 'redux';
 import * as ReactRedux from 'react-redux';
+import AuthorQuiz from './components/authorQuiz/AuthorQuiz';
+import AddAuthorForm from './components/addAuthor/AddAuthorForm';
 
 const authors = [
   {
@@ -101,18 +96,4 @@ function render() {
   </BrowserRouter>, document.getElementById('root'));
 }
 render();
-
-// const props = { a:2, b: 4};
-// ReactDOM.render(<Sum {...props} />,  document.getElementById('root'));
-// const showChildren = true;
-
-// ReactDOM.render(<Clicker handleClick={(letter) => { console.log(`${letter} clicked.`) }} />, document.getElementById('root'));
-// ReactDOM.render(<DangerContainer dangerous='<strong>Hello</strong>' />,  document.getElementById('root'));
-// ReactDOM.render(<ConditionDisplay isVisible={ showChildren }>
-//     <h1><span>Sum</span></h1><Sum  {...props}/>
-// </ConditionDisplay>,  document.getElementById('root'));
-// ReactDOM.render(<ClickButtons numbers={ 10 } onSelect={console.log} />,  document.getElementById('root'));
-
-// ReactDOM.render(<Reloader></Reloader>,  document.getElementById('root'));
-
 serviceWorker.unregister();

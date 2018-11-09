@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './App.css';
+import './AuthorQuiz.css';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
